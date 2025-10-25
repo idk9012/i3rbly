@@ -1,0 +1,21 @@
+# Netlify redirects for static multipage (root publish)
+/about     /about.html      200
+/contact   /contact.html    200
+/privacy   /privacy.html    200
+/terms     /terms.html      200
+/tool      /tool.html       200
+/rules     /rules.html      200
+/progress  /progress.html   200
+/history   /history.html    200
+/blog      /blog.html       200
+/blog/:id  /blog-post.html  200
+
+# SEO/static assets
+/robots.txt        /public/robots.txt    200
+/sitemap.xml       /public/sitemap.xml   200
+/ads.txt           /public/ads.txt       200
+/humans.txt        /public/humans.txt    200
+/.well-known/security.txt /public/.well-known/security.txt 200
+/manifest.json     /public/manifest.json 200
+/sw.js             /public/sw.js         200
+

@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <title>التاريخ</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline' 'unsafe-eval' https: data: blob:; img-src 'self' https: data: blob:; font-src 'self' https: data:;" />
+    <link rel="icon" href="public/logo.png" />
+    <link rel="manifest" href="public/manifest.json" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Aref+Ruqaa+Ink:wght@400;700&family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="assets/styles.css" />
+  </head>
+  <body>
+    <div class="app-root">
+      <div class="bg-animated" aria-hidden="true"><div class="blob one"></div><div class="blob two"></div><div class="blob three"></div><div class="blob four"></div><div class="blob five"></div><div class="particles" id="particles-container"></div></div>
+      <header class="site-header">
+        <div class="container header-inner">
+          <div class="nav-area">
+            <button class="nav-toggle" aria-expanded="false" aria-label="فتح القائمة"><span></span><span></span><span></span></button>
+            <nav class="site-nav" aria-label="التنقل الرئيسي">
+              <button class="nav-back" aria-label="رجوع" title="رجوع"></button>
+              <ul>
+                <li><a href="index.html">الرئيسية</a></li>
+                <li><a href="tool.html"><span class="ruqaa ruqaa-invert no-glow">أعربلي</span></a></li>
+                <li><a href="rules.html">قواعد النحو</a></li>
+                <li><a href="history.html" class="active">التاريخ</a></li>
+                <li><a href="progress.html">التقدم</a></li>
+                <li><a href="blog.html">المدونة</a></li>
+                <li><a href="about.html">من نحن</a></li>
+                <li><a href="contact.html">اتصل بنا</a></li>
+              </ul>
+            </nav>
+          </div>
+          <a href="index.html" class="brand" aria-label="الانتقال إلى الرئيسية"><img src="public/logo.png" alt="شعار أعربلي" class="logo" /></a>
+        </div>
+      </header>
+      <main class="content">
+        <section id="history" class="section">
+          <div class="container">
+            <h1 class="neon-title ruqaa" style="text-align:center;margin-bottom:32px;font-size:clamp(36px,6vw,56px)">تاريخ الإعراب</h1>
+            <p class="lead" style="text-align:center;margin-bottom:40px;font-size:clamp(16px,3vw,18px);color:var(--muted)">الجمل المحفوظة</p>
+
+            <div class="card" style="margin-bottom:24px">
+              <div style="margin-bottom:16px">
+                <input 
+                  type="text" 
+                  id="history-search" 
+                  placeholder="ابحث في التاريخ..." 
+                  style="width:100%;padding:12px 16px;border:2px solid var(--neon);border-radius:8px;background:rgba(0,0,0,0.3);color:var(--text);font-size:16px;font-family:inherit"
+                />
+              </div>
+              <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:center;justify-content:center">
+                <button class="button active" data-filter="all">الكل</button>
+                <button class="button" data-filter="fav">المفضلة ⭐</button>
+                <button class="button" data-filter="recent">الأحدث 🕐</button>
+                <button id="export-history" class="button primary">تصدير التاريخ 📥</button>
+              </div>
+            </div>
+
+            <div class="grid grid-3" id="history-grid" style="margin-bottom:32px"></div>
+
+            <div id="history-empty" class="card" style="display:none;text-align:center;padding:60px 20px">
+              <div style="font-size:64px;margin-bottom:16px">📝</div>
+              <h3 style="color:var(--neon);margin-bottom:12px;font-size:clamp(20px,4vw,28px)">لا توجد جمل محفوظة</h3>
+              <p style="color:var(--muted);margin-bottom:24px;font-size:clamp(14px,3vw,16px)">ابدأ بإعراب بعض الجمل لحفظها في التاريخ</p>
+              <div style="margin-top:24px"><a href="tool.html" class="button primary glow">🚀 ابدأ الإعراب</a></div>
+            </div>
+          </div>
+        </section>
+      </main>
+      <footer class="footer">
+        <div class="container">
+          <p style="margin:10px;color:var(--muted);font-size:1.2rem">
+            <a href="about.html" style="color:var(--muted)">About Us</a> | <a href="blog.html" style="color:var(--muted)">Blog</a> | <a href="contact.html" style="color:var(--muted)">Contact Us</a> | <a href="privacy.html" style="color:var(--muted)">Privacy Policy</a> | <a href="terms.html" style="color:var(--muted)">Terms & Conditions</a>
+          </p>
+          <p style="margin:10px;color:var(--muted)">يمكن لـ <span class="neon-title no-glow ruqaa ruqaa-blue ruqaa-invert" style="font-size:clamp(20px,6vw,30px);color:var(--neon)">اعربلي</span> أن يخطئ، ليس دقيقاً بنسبة 100%</p>
+          <p style="margin:10px;color:var(--muted)">تطوير الواجهة: <a class="neon-title no-glow ruqaa ruqaa-blue ruqaa-invert" href="https://www.linkedin.com/in/omar-mohammed-aa0007322" target="_blank" rel="noopener noreferrer" style="font-size:clamp(20px,6vw,34px); color:var(--neon)">عمر محمد</a></p>
+          <p style="margin:10px;color:var(--muted)">تطوير أعربلي: <a class="neon-title no-glow ruqaa ruqaa-blue ruqaa-invert" href="https://pplo.dev" target="_blank" rel="noopener noreferrer" style="font-size:clamp(20px,6vw,34px); color:var(--neon)">يوسف ببلو</a></p>
+          <p style="margin:10px;color:var(--muted);font-size:.9rem">صنع في <span style="color:red">م</span><span>ص</span><span style="color:black">ر</span></p>
+          <p style="margin:0;color:var(--muted)">جميع الحقوق محفوظة © <span id="year"></span></p>
+        </div>
+      </footer>
+    </div>
+    
+    <script src="assets/app.js"></script>
+  </body>
+  </html>
+
+

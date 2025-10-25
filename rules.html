@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <title>قواعد النحو</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline' 'unsafe-eval' https: data: blob:; img-src 'self' https: data: blob:; font-src 'self' https: data:;" />
+    <link rel="icon" href="public/logo.png" />
+    <link rel="manifest" href="public/manifest.json" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Aref+Ruqaa+Ink:wght@400;700&family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="assets/styles.css" />
+  </head>
+  <body>
+    <div class="app-root">
+      <div class="bg-animated" aria-hidden="true"><div class="blob one"></div><div class="blob two"></div><div class="blob three"></div><div class="blob four"></div><div class="blob five"></div><div class="particles" id="particles-container"></div></div>
+      <header class="site-header">
+        <div class="container header-inner">
+          <div class="nav-area">
+            <button class="nav-toggle" aria-expanded="false" aria-label="فتح القائمة"><span></span><span></span><span></span></button>
+            <nav class="site-nav" aria-label="التنقل الرئيسي">
+              <button class="nav-back" aria-label="رجوع" title="رجوع"></button>
+              <ul>
+                <li><a href="index.html">الرئيسية</a></li>
+                <li><a href="tool.html"><span class="ruqaa ruqaa-invert no-glow">أعربلي</span></a></li>
+                <li><a href="rules.html" class="active">قواعد النحو</a></li>
+                <li><a href="history.html">التاريخ</a></li>
+                <li><a href="progress.html">التقدم</a></li>
+                <li><a href="blog.html">المدونة</a></li>
+                <li><a href="about.html">من نحن</a></li>
+                <li><a href="contact.html">اتصل بنا</a></li>
+              </ul>
+            </nav>
+          </div>
+          <a href="index.html" class="brand" aria-label="الانتقال إلى الرئيسية"><img src="public/logo.png" alt="شعار أعربلي" class="logo" /></a>
+        </div>
+      </header>
+      <main class="content">
+        <section id="rules" class="section">
+          <div class="container" style="max-width:1100px">
+            <h1 class="ruqaa ruqaa-invert" style="text-align:center;margin-top:0;font-size:clamp(36px,6vw,48px);margin-bottom:32px">قواعد النحو العربي</h1>
+            <input type="text" id="rules-search" class="search-input" placeholder="ابحث في القواعد النحوية...">
+            <div class="card rules-filter-card" style="margin-bottom:16px;padding:6px 10px;max-width:550px;margin-left:auto;margin-right:auto">
+              <div style="display:flex;flex-wrap:wrap;gap:6px;justify-content:center;align-items:center">
+                <button class="filter-btn active" data-filter="all">الكل</button>
+                <button class="filter-btn" data-filter="nahw">النحو</button>
+                <button class="filter-btn" data-filter="saraf">الصرف</button>
+                <button class="filter-btn" data-filter="balagha">البلاغة</button>
+              </div>
+            </div>
+            
+            <div class="grid grid-3" id="rules-grid" style="gap:20px"></div>
+          </div>
+        </section>
+      </main>
+      <footer class="footer">
+        <div class="container">
+          <p style="margin:10px;color:var(--muted);font-size:1.2rem">
+            <a href="about.html" style="color:var(--muted)">About Us</a> | <a href="blog.html" style="color:var(--muted)">Blog</a> | <a href="contact.html" style="color:var(--muted)">Contact Us</a> | <a href="privacy.html" style="color:var(--muted)">Privacy Policy</a> | <a href="terms.html" style="color:var(--muted)">Terms & Conditions</a>
+          </p>
+          <p style="margin:10px;color:var(--muted)">يمكن لـ <span class="neon-title no-glow ruqaa ruqaa-blue ruqaa-invert" style="font-size:clamp(20px,6vw,30px);color:var(--neon)">اعربلي</span> أن يخطئ، ليس دقيقاً بنسبة 100%</p>
+          <p style="margin:10px;color:var(--muted)">تطوير الواجهة: <a class="neon-title no-glow ruqaa ruqaa-blue ruqaa-invert" href="https://www.linkedin.com/in/omar-mohammed-aa0007322" target="_blank" rel="noopener noreferrer" style="font-size:clamp(20px,6vw,34px); color:var(--neon)">عمر محمد</a></p>
+          <p style="margin:10px;color:var(--muted)">تطوير أعربلي: <a class="neon-title no-glow ruqaa ruqaa-blue ruqaa-invert" href="https://pplo.dev" target="_blank" rel="noopener noreferrer" style="font-size:clamp(20px,6vw,34px); color:var(--neon)">يوسف ببلو</a></p>
+          <p style="margin:10px;color:var(--muted);font-size:.9rem">صنع في <span style="color:red">م</span><span>ص</span><span style="color:black">ر</span></p>
+          <p style="margin:0;color:var(--muted)">جميع الحقوق محفوظة © <span id="year"></span></p>
+        </div>
+      </footer>
+    </div>
+    
+    <script src="assets/app.js"></script>
+  </body>
+  </html>
+
+
