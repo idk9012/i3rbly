@@ -900,65 +900,221 @@ p{line-height:1.8;margin:0 0 18px}
 .loader-bar{height:3px;border-radius:999px;background:rgba(24,255,243,.15);overflow:hidden;margin-top:10px}
 .loader-bar span{display:block;height:100%;width:40%;background:linear-gradient(90deg, transparent, var(--neon), transparent);animation:slide 1.4s ease-in-out infinite}
 @keyframes slide{0%{transform:translateX(-100%)}50%{transform:translateX(120%)}100%{transform:translateX(220%)}}
-.ad-slot{display:flex;align-items:center;justify-content:center;margin:12px auto;border:1px dashed rgba(24,255,243,.25);border-radius:12px;min-height:90px;max-width:100%}
-.ad-placeholder{display:flex;align-items:center;justify-content:center;margin:12px auto;border:1px dashed rgba(24,255,243,.25);border-radius:12px;min-height:90px;max-width:100%}
+/* ============================================
+   GOOGLE ADSENSE - PROFESSIONAL RESPONSIVE ADS
+   ============================================ */
 
-/* AdSense Components Styling */
+/* Main AdSense Container - Clean Integration */
 .adsense-container {
   display: block;
   width: 100%;
-  margin: 12px auto;
+  max-width: 100%;
+  margin: 32px auto;
   text-align: center;
   overflow: hidden;
+  position: relative;
+  border-radius: 16px;
+  background: linear-gradient(135deg, rgba(13,35,43,.5), rgba(11,26,33,.6));
+  border: 1px solid rgba(24,255,243,.15);
+  padding: 16px;
+  box-sizing: border-box;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: all 0.3s ease;
 }
 
+.adsense-container:hover {
+  border-color: rgba(24,255,243,.25);
+  box-shadow: 0 4px 16px rgba(24,255,243,.1);
+}
+
+/* AdSense Element */
 .adsense-container .adsbygoogle {
   display: block !important;
   margin: 0 auto;
+  max-width: 100%;
+  background: transparent !important;
 }
 
-.header-ad {
+/* Ad Label - Subtle & Professional */
+.adsense-container::before {
+  content: 'إعلان';
+  display: block;
+  text-align: center;
+  font-size: 11px;
+  color: rgba(157, 223, 236, 0.5);
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 500;
+}
+
+/* Header/Top Banner Ad - Leaderboard */
+.header-ad,
+.top-banner-ad {
   max-width: 100%;
+  min-height: 90px;
+  margin: 24px auto;
+}
+
+.header-ad .adsbygoogle,
+.top-banner-ad .adsbygoogle {
   min-height: 90px;
 }
 
+/* Sidebar Ad - Rectangle */
 .sidebar-ad {
-  max-width: 300px;
+  max-width: 100%;
   min-height: 250px;
+  margin: 24px auto;
 }
 
-.content-ad {
+.sidebar-ad .adsbygoogle {
+  min-height: 250px;
+  max-width: 300px;
+  margin: 0 auto;
+}
+
+/* Content/In-Feed Ad - Large Rectangle */
+.content-ad,
+.in-feed-ad {
   max-width: 100%;
+  min-height: 280px;
+  margin: 40px auto;
+}
+
+.content-ad .adsbygoogle,
+.in-feed-ad .adsbygoogle {
   min-height: 280px;
 }
 
+/* Footer Ad - Wide Banner */
 .footer-ad {
   max-width: 100%;
-  min-height: 320px;
+  min-height: 100px;
+  margin: 32px auto 24px;
 }
 
+.footer-ad .adsbygoogle {
+  min-height: 100px;
+}
+
+/* Responsive/Auto Ad */
 .responsive-ad {
   max-width: 100%;
   min-height: 200px;
-  border: 1px dashed rgba(24,255,243,.25);
-  border-radius: 14px;
-  background: linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.02));
-  padding: 8px;
-  transition: transform .25s ease, box-shadow .25s ease;
+  margin: 32px auto;
 }
 
-/* AdSense loading state */
+.responsive-ad .adsbygoogle {
+  min-height: 200px;
+}
+
+/* Between Sections Ad */
+.section-ad {
+  max-width: 100%;
+  margin: 48px auto;
+  padding: 20px;
+}
+
+.section-ad .adsbygoogle {
+  min-height: 250px;
+}
+
+/* Tool Page Ad - Above/Below Tool */
+.tool-ad {
+  max-width: 100%;
+  margin: 32px auto;
+}
+
+.tool-ad .adsbygoogle {
+  min-height: 280px;
+}
+
+/* AdSense Loading State - Elegant */
 .adsense-container:empty::after {
   content: 'جاري تحميل الإعلان...';
   display: flex;
   align-items: center;
   justify-content: center;
   min-height: 120px;
-  color: var(--muted);
-  font-size: 0.9rem;
-  border: 1px dashed rgba(24,255,243,.25);
-  border-radius: 12px;
-  background: rgba(255,255,255,.02);
+  color: rgba(157, 223, 236, 0.4);
+  font-size: 0.875rem;
+  animation: adPulse 2s ease-in-out infinite;
+}
+
+@keyframes adPulse {
+  0%, 100% {
+    opacity: 0.4;
+  }
+  50% {
+    opacity: 0.6;
+  }
+}
+
+/* Legacy Support */
+.ad-slot,
+.ad-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 24px auto;
+  border: 1px dashed rgba(24,255,243,.2);
+  border-radius: 14px;
+  min-height: 90px;
+  max-width: 100%;
+  background: rgba(13,35,43,.3);
+  padding: 16px;
+  box-sizing: border-box;
+}
+
+/* Mobile Responsive Adjustments */
+@media (max-width: 768px) {
+  .adsense-container {
+    margin: 24px auto;
+    padding: 12px;
+    border-radius: 12px;
+  }
+  
+  .header-ad,
+  .top-banner-ad {
+    min-height: 100px;
+    margin: 20px auto;
+  }
+  
+  .sidebar-ad {
+    max-width: 100%;
+    min-height: 250px;
+  }
+  
+  .sidebar-ad .adsbygoogle {
+    max-width: 100%;
+  }
+  
+  .content-ad,
+  .in-feed-ad {
+    min-height: 250px;
+    margin: 32px auto;
+  }
+  
+  .footer-ad {
+    min-height: 100px;
+    margin: 24px auto 20px;
+  }
+  
+  .responsive-ad {
+    min-height: 250px;
+    margin: 24px auto;
+  }
+  
+  .section-ad {
+    margin: 32px auto;
+    padding: 12px;
+  }
+  
+  .tool-ad {
+    margin: 24px auto;
+  }
 }
 @media (max-width:720px){
   .responsive-ad{min-height:140px}
