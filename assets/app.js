@@ -658,22 +658,36 @@ let userProgress = JSON.parse(localStorage.getItem('userProgress') || '{"totalSe
     }
 
     function saveToHistory(sentence, result) {
+      // Normalize sentence for comparison (trim and normalize spaces)
+      const normalizeSentence = (str) => {
+        return str.trim().replace(/\s+/g, ' ')
+      }
+      
+      const normalizedInput = normalizeSentence(sentence)
+      
       // Check if this exact sentence already exists in history
-      const existingIndex = sentenceHistory.findIndex(h => h.sentence === sentence)
+      const existingIndex = sentenceHistory.findIndex(h => 
+        normalizeSentence(h.sentence) === normalizedInput
+      )
       
       if (existingIndex !== -1) {
         // Sentence already exists - update its timestamp and move to top
         const existingItem = sentenceHistory[existingIndex]
         existingItem.timestamp = new Date().toISOString()
         existingItem.result = result // Update the result in case it changed
+        existingItem.sentence = sentence // Update with current version (in case spacing changed)
         
         // Remove from old position and add to beginning
         sentenceHistory.splice(existingIndex, 1)
         sentenceHistory.unshift(existingItem)
         
         localStorage.setItem('sentenceHistory', JSON.stringify(sentenceHistory))
-        // Don't update progress for duplicates
-        return
+        
+        // Show feedback that this was updated, not added
+        console.log('📝 Sentence updated in history (duplicate detected)')
+        
+        // Don't update progress counter for duplicates
+        return true // Return true to indicate this was a duplicate update
       }
       
       // New unique sentence - create new item
@@ -686,13 +700,20 @@ let userProgress = JSON.parse(localStorage.getItem('userProgress') || '{"totalSe
       }
       
       sentenceHistory.unshift(historyItem)
+      
+      // Limit history to 100 items
       if (sentenceHistory.length > 100) {
         sentenceHistory = sentenceHistory.slice(0, 100)
       }
       
       localStorage.setItem('sentenceHistory', JSON.stringify(sentenceHistory))
+      
+      console.log('✅ New sentence added to history')
+      
       // Only update progress for new unique sentences
       updateProgress('totalSentences')
+      
+      return false // Return false to indicate this was a new entry
     }
 
     function toggleFavorite(historyId) {
@@ -812,7 +833,17 @@ let userProgress = JSON.parse(localStorage.getItem('userProgress') || '{"totalSe
           
           // Save to history and show save button
           if (data.html && !data.html.includes('خطأ')) {
-            saveToHistory(sentence, data.html)
+            const isDuplicate = saveToHistory(sentence, data.html)
+            
+            // Show notification if duplicate
+            if (isDuplicate && copyStatus) {
+              copyStatus.textContent = '🔄 تم تحديث الوقت في السجل'
+              copyStatus.style.color = '#18fff3'
+              setTimeout(() => {
+                copyStatus.textContent = ''
+              }, 3000)
+            }
+            
             if (saveSentence) {
               saveSentence.style.display = 'inline-flex'
             }
