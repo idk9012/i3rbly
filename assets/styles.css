@@ -2900,6 +2900,102 @@ a:hover{transform:translateY(-1px)}
 }
 
 /* ============================================
+   LOW PERFORMANCE MODE
+   ============================================ */
+/* Toggle control styles (header) */
+.perf-toggle{display:flex;align-items:center;gap:10px;margin-inline-start:8px}
+.perf-toggle-label{color:var(--muted);font-weight:700;font-size:14px;white-space:nowrap}
+/* OFF state: neutral track */
+.perf-switch{position:relative;width:54px;height:28px;border-radius:999px;background:rgba(60,70,75,.35);border:2px solid rgba(120,130,135,.5);cursor:pointer;display:inline-block;box-shadow:0 2px 10px rgba(0,0,0,.35)}
+.perf-switch::after{content:"";position:absolute;inset:2px;border-radius:999px;border:1px solid rgba(255,255,255,.06)}
+.perf-switch .knob{position:absolute;top:50%;inset-inline-start:4px;width:22px;height:22px;border-radius:50%;background:#0a0a0a;box-shadow:0 0 0 2px rgba(120,130,135,.45);transform:translateY(-50%);transition:inset-inline-start .25s ease,inset-inline-end .25s ease,transform .25s ease,box-shadow .25s ease}
+/* ON state: teal highlight */
+.perf-switch[aria-checked="true"]{background:linear-gradient(135deg, rgba(24,255,243,.25), rgba(30,155,255,.2));border-color:rgba(24,255,243,.45)}
+.perf-switch[aria-checked="true"] .knob{inset-inline-start:auto;inset-inline-end:4px;box-shadow:0 0 0 2px rgba(24,255,243,.5), 0 0 10px rgba(24,255,243,.25)}
+
+/* Compact on small screens */
+@media (max-width:720px){
+  .perf-toggle-label{font-size:13px}
+  .perf-switch{width:48px;height:26px}
+  .perf-switch .knob{width:20px;height:20px}
+}
+
+/* Global overrides when low-perf is enabled (targeted) */
+body.low-perf{scroll-behavior:auto}
+/* Keep background layer but stop heavy blob animations; hide particles entirely */
+body.low-perf .particles{display:none !important}
+body.low-perf .blob{animation:none !important;box-shadow:none !important;filter:blur(60px) brightness(1) !important}
+/* Tone down glow/shadows without killing component transitions */
+body.low-perf .neon-title{animation:none !important;background:none !important;-webkit-text-fill-color:inherit !important;text-shadow:none !important}
+body.low-perf .glow{box-shadow:none !important}
+body.low-perf .brand .logo{filter:none !important;animation:none !important}
+/* Remove expensive backdrop blurs on glassy cards, keep other transitions */
+body.low-perf .card,
+body.low-perf .feature-card,
+body.low-perf .stat-card,
+body.low-perf .testimonial-card,
+body.low-perf .blog-card,
+body.low-perf .parse-output,
+body.low-perf .site-header{
+  backdrop-filter:none !important;
+  -webkit-backdrop-filter:none !important;
+  box-shadow:none !important;
+}
+/* Progress/accuracy bars and token pop-ins */
+body.low-perf .accuracy-fill{animation:none !important}
+body.low-perf .token{animation:none !important}
+/* Keep navbar/menu/button animations intact */
+
+/* ============================================
+   CONSISTENT PAGE TITLES
+   ============================================ */
+.page-title{background:none !important;text-shadow:0 0 14px rgba(30,155,255,.35) !important}
+/* Give a subtle animated glow in low-perf (cheap text-shadow animation) */
+body.low-perf .page-title{animation:glowPulse 2.2s ease-in-out infinite;text-shadow:0 0 14px rgba(30,155,255,.6),0 0 34px rgba(30,155,255,.35)}
+
+/* ============================================
+   SECTION DIVIDERS & RESPONSIVE SPACING
+   ============================================ */
+/* Decorative divider under section titles (Home page only) */
+body.is-home .section h1::after,
+body.is-home .section h2::after{
+  content:"";
+  display:block;
+  width:min(260px,60%);
+  height:2px;
+  margin:18px auto 36px;
+  background:linear-gradient(90deg, transparent, var(--neon), transparent);
+  box-shadow:0 0 16px rgba(24,255,243,.35);
+  opacity:.9;
+}
+/* Slightly larger divider on desktop */
+@media (min-width:721px){
+  body.is-home .section h1::after, body.is-home .section h2::after{width:min(380px,50%);margin:22px auto 48px}
+}
+/* Tighten on extra small devices */
+@media (max-width:480px){
+  body.is-home .section h1::after, body.is-home .section h2::after{width:72%;margin:16px auto 34px;opacity:.85}
+}
+
+/* Consistent vertical spacing between title, CTAs, and cards */
+.section .grid{margin-top:8px}
+@media (min-width:721px){
+  .section .grid{margin-top:12px}
+}
+@media (max-width:720px){
+  .section .grid{margin-top:6px}
+}
+
+/* Steps section spacing (beneath the divider) */
+.steps-container{margin-top:52px}
+@media (max-width:1024px){
+  .steps-container{margin-top:56px}
+}
+@media (max-width:720px){
+  .steps-container{margin-top:60px}
+}
+
+/* ============================================
    SPINNER DOTS ANIMATION
    ============================================ */
 

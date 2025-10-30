@@ -23,6 +23,11 @@
   // ============================================
   
   function createFloatingParticles() {
+    if (document.body && document.body.classList && document.body.classList.contains('low-perf')) {
+      const containerSkip = document.getElementById('particles-container')
+      if (containerSkip) containerSkip.innerHTML = ''
+      return
+    }
     const container = document.getElementById('particles-container')
     if (!container) return
     
@@ -76,6 +81,85 @@
     clearTimeout(resizeTimeout)
     resizeTimeout = setTimeout(createFloatingParticles, 500)
   })
+
+  // ============================================
+  // LOW PERFORMANCE MODE TOGGLE (Global)
+  // ============================================
+  const LOW_PERF_KEY = 'lowPerfEnabled'
+  function applyLowPerfMode(enabled){
+    document.body.classList.toggle('low-perf', !!enabled)
+    if (enabled){
+      const pc = document.getElementById('particles-container')
+      if (pc) pc.innerHTML = ''
+    } else {
+      // Recreate particles when turning back on
+      try { createFloatingParticles() } catch(e){}
+    }
+  }
+  // initialize from storage
+  const savedLowPerf = (function(){
+    try{ return localStorage.getItem(LOW_PERF_KEY) === '1' }catch(e){ return false }
+  })()
+
+  // Enhance page titles to consistent blue style
+  ;(function enhancePageTitles(){
+    const headings = document.querySelectorAll('main h1')
+    headings.forEach(function(h){
+      // Unify classes and always ensure inversion so headings render blue consistently
+      h.classList.add('neon-title','no-glow','ruqaa','page-title','ruqaa-invert')
+    })
+  })()
+  if (savedLowPerf) applyLowPerfMode(true)
+
+  // ============================================
+  // UNIFIED HEADER BUILDER (Sync navbar across pages)
+  // ============================================
+  // Mark home page on body for scoped CSS (e.g., dividers)
+  ;(function markHome(){
+    const page = (location.pathname.split('/').pop() || 'index.html')
+    if (page === '' || page === 'index.html') {
+      document.body.classList.add('is-home')
+    }
+  })()
+  ;(function synchronizeHeader(){
+    const header = document.querySelector('.site-header')
+    if (!header) return
+    // Build consistent header structure
+    const html = [
+      '<div class="container header-inner">',
+      '  <div class="nav-area">',
+      '    <button class="nav-toggle" aria-expanded="false" aria-label="فتح القائمة"><span></span><span></span><span></span></button>',
+      '    <nav class="site-nav" aria-label="التنقل الرئيسي">',
+      '      <button class="nav-back" aria-label="رجوع" title="رجوع">✕</button>',
+      '      <div class="mobile-nav-header">',
+      '        <h2 class="mobile-nav-title ruqaa ruqaa-invert">أعربلي</h2>',
+      '      </div>',
+      '      <ul>',
+      '        <li><a href="index.html">الرئيسية</a></li>',
+      '        <li><a href="tool.html"><span class="ruqaa ruqaa-invert no-glow">أعربلي</span></a></li>',
+      '        <li><a href="rules.html">قواعد النحو</a></li>',
+      '        <li><a href="history.html">التاريخ</a></li>',
+      '        <li><a href="progress.html">التقدم</a></li>',
+      '        <li><a href="blog.html">المدونة</a></li>',
+      '        <li><a href="about.html">من نحن</a></li>',
+      '        <li><a href="contact.html">اتصل بنا</a></li>',
+      '      </ul>',
+      '    </nav>',
+      '  </div>',
+      '  <a href="index.html" class="brand" aria-label="الانتقال إلى الرئيسية">',
+      '    <img src="public/logo.png" alt="شعار أعربلي - نظام الإعراب بالذكاء الاصطناعي" class="logo" />',
+      '  </a>',
+      '</div>'
+    ].join('')
+    header.innerHTML = html
+    // Set active link based on current path
+    const path = (location.pathname.split('/').pop() || 'index.html')
+    const links = header.querySelectorAll('.site-nav a')
+    links.forEach(function(a){
+      const href = a.getAttribute('href')
+      if (href === path) a.classList.add('active')
+    })
+  })()
 
   // Hide .html extensions visually by rewriting hrefs on load
   document.querySelectorAll('a[href$=".html"]').forEach(function(a){
@@ -1658,6 +1742,43 @@ let userProgress = JSON.parse(localStorage.getItem('userProgress') || '{"totalSe
       }
     }, { passive: true })
   }
+
+  // Insert Low Performance toggle into header
+  ;(function initPerfToggle(){
+    const headerInner = document.querySelector('.header-inner')
+    if (!headerInner) return
+    const toggleWrap = document.createElement('div')
+    toggleWrap.className = 'perf-toggle'
+    const label = document.createElement('span')
+    label.className = 'perf-toggle-label'
+    label.textContent = 'وضع الأداء المنخفض'
+    const switchBtn = document.createElement('button')
+    switchBtn.className = 'perf-switch'
+    switchBtn.type = 'button'
+    switchBtn.setAttribute('role','switch')
+    switchBtn.setAttribute('aria-label','تفعيل وضع الأداء المنخفض')
+    switchBtn.setAttribute('aria-checked', savedLowPerf ? 'true' : 'false')
+    const knob = document.createElement('span')
+    knob.className = 'knob'
+    switchBtn.appendChild(knob)
+    toggleWrap.appendChild(label)
+    toggleWrap.appendChild(switchBtn)
+
+    // Place near navigation area, before brand for better RTL alignment
+    const navArea = document.querySelector('.nav-area')
+    if (navArea && navArea.parentElement === headerInner){
+      navArea.appendChild(toggleWrap)
+    } else {
+      headerInner.appendChild(toggleWrap)
+    }
+
+    switchBtn.addEventListener('click', function(){
+      const next = this.getAttribute('aria-checked') !== 'true'
+      this.setAttribute('aria-checked', next ? 'true' : 'false')
+      applyLowPerfMode(next)
+      try{ localStorage.setItem(LOW_PERF_KEY, next ? '1' : '0') }catch(e){}
+    })
+  })()
 
   // Footer dynamic year and last-updated
   var yearEl = document.getElementById('year')
